@@ -1,0 +1,8 @@
+.b-horoscope {
+	max-width: 600px;
+	margin: 20px auto;
+}
+.b-horoscope__item img {
+	width: 100%;
+	height: auto;
+}
