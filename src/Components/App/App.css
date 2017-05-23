@@ -2,11 +2,3 @@ body {
   margin: 0;
   padding: 0;
 }
-
-.b-menu-btn .material-icons {
-  color: #fff;
-}
-
-.b-menu-btn__item .material-icons {
-  color: #000;
-}
