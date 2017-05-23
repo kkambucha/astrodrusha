@@ -13,8 +13,33 @@
   },
   "reactToolbox": {
     "include": [
+      "AUTOCOMPLETE",
+      "AVATAR",
       "BUTTON",
-      "DATE_PICKER"
+      "CARD",
+      "CHECKBOX",
+      "CHIP",
+      "DATE_PICKER",
+      "DIALOG",
+      "DRAWER",
+      "DROPDOWN",
+      "INPUT",
+      "LAYOUT",
+      "LINK",
+      "LIST",
+      "MENU",
+      "NAVIGATION",
+      "OVERLAY",
+      "PROGRESS_BAR",
+      "RADIO",
+      "RIPPLE",
+      "SLIDER",
+      "SNACKBAR",
+      "SWITCH",
+      "TABLE",
+      "TABS",
+      "TIME_PICKER",
+      "TOOLTIP"
     ],
     "customProperties": {
       "animation-duration": "0.3s",
@@ -23,7 +48,7 @@
       "color-primary-contrast": "var(--color-dark-contrast)",
       "color-accent-contrast": "var(--color-dark-contrast)"
     },
-    "output": "assets/react-toolbox"
+    "output": "./src/assets/react-toolbox"
   },
   "scripts": {
     "start": "react-scripts start",
