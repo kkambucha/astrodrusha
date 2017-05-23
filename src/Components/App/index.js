@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
-import './App.css';
 import Button from 'react-toolbox/lib/button/Button';
 import AppBar from 'react-toolbox/lib/app_bar/AppBar';
-import './assets/react-toolbox/theme.css';
 import IconMenu from 'react-toolbox/lib/menu/IconMenu';
 import MenuItem from 'react-toolbox/lib/menu/MenuItem';
+import '../../assets/react-toolbox/theme.css';
+import './App.css';
 
 const MenuTest = () => (
     <IconMenu icon='more_vert' position='topRight' className='b-menu-btn' menuRipple>
