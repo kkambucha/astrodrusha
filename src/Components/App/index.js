@@ -7,6 +7,7 @@ import Progress from '../Progress';
 import fetcher from '../../fetcher';
 import '../../assets/react-toolbox/theme.css';
 import './App.css';
+import getRuSignName from '../../libs/translateSigns';
 
 class App extends Component {
     constructor(props) {
@@ -63,7 +64,7 @@ class App extends Component {
                     .then((data) => {
                         this.data[sign] = {
                             text: data.translationText,
-                            ruName: this.getRuSignName(sign),
+                            ruName: getRuSignName(sign),
                             enName: sign.toLowerCase()
                         };
                     });
@@ -74,51 +75,6 @@ class App extends Component {
             this.setState({data: this.orderedSigns(this.data)});
             this.setState({dataFetched: true});
         });
-    }
-    getRuSignName(name) {
-        let sign = name.toLowerCase();
-
-        switch(sign) {
-            case 'aries':
-                return 'Овен';
-                break;
-            case 'taurus':
-                return 'Телец';
-                break;
-            case 'gemini':
-                return 'Близнецы';
-                break;
-            case 'cancer':
-                return 'Рак';
-                break;
-            case 'leo':
-                return 'Лев';
-                break;
-            case 'virgo':
-                return 'Дева';
-                break;
-            case 'libra':
-                return 'Весы';
-                break;
-            case 'scorpio':
-                return 'Скорпион';
-                break;
-            case 'sagittarius':
-                return 'Стрелец';
-                break;
-            case 'capricorn':
-                return 'Козерог';
-                break;
-            case 'aquarius':
-                return 'Водолей';
-                break;
-            case 'pisces':
-                return 'Рыбы';
-                break;
-            default:
-                return 'Неизвестный';
-                break;
-        }
     }
     orderedSigns(data){
         let orderedSigns = [];
@@ -136,10 +92,8 @@ class App extends Component {
     render() {
         return (
             <div className="App">
-                <AppBar title='АстроДрюша'>
-                    <TopMenu/>
-                </AppBar>
-                {this.state.dataFetched && this.state.horoscopeIsActive ? <Horoscope data={this.state.data}/> : null}
+                <AppBar title='АстроДрюша'/>
+                {this.state.dataFetched && this.state.horoscopeIsActive ? <Horoscope data={this.state.data} signsNames={this.signs}/> : null}
                 {this.state.progresIsStarting && !this.state.isLoaded ? <Progress setCompleteProgress={this.setCompleteProgress.bind(this)}/> : null}
                 <Dialog
                     actions={this.actions}
