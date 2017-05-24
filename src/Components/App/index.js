@@ -91,7 +91,7 @@ class App extends Component {
     }
     render() {
         return (
-            <div className="App">
+            <div className="b-app">
                 <AppBar title='АстроДрюша'/>
                 {this.state.dataFetched && this.state.horoscopeIsActive ? <Horoscope data={this.state.data} signsNames={this.signs}/> : null}
                 {this.state.progresIsStarting && !this.state.isLoaded ? <Progress setCompleteProgress={this.setCompleteProgress.bind(this)}/> : null}

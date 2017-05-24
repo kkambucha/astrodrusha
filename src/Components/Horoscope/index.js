@@ -38,11 +38,13 @@ class Horoscope extends Component {
 
         return (
             <div className="b-horoscope">
-                <Dropdown
-                    source={this.selectValues}
-                    onChange={this.slide.bind(this)}
-                    value={this.state.slideSelected}
-                />
+                <div className="b-horoscope__select">
+                    <Dropdown
+                        source={this.selectValues}
+                        onChange={this.slide.bind(this)}
+                        value={this.state.slideSelected}
+                    />
+                </div>
                 <Slider ref='slider' {...settings}>
                     {
                         Object.keys(this.props.data).map((key, index) => {

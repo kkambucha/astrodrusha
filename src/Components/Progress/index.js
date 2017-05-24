@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import ProgressBar from 'react-toolbox/lib/progress_bar/ProgressBar';
+import './Progress.css';
 
 class Progress extends Component {
     constructor(props) {
@@ -56,7 +57,8 @@ class Progress extends Component {
     }
     render() {
         return (
-            <div>{this.state.message}
+            <div className="b-progress">
+                <div className="b-progress__msg">{this.state.message}</div>
                 <br/>
                 <ProgressBar min={0} max={100} mode='determinate' value={this.state.progress} buffer={this.state.buffer}/>
             </div>
