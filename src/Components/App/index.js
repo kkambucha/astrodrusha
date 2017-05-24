@@ -22,17 +22,7 @@ class App extends Component {
             { label: "Готов", onClick: this.handleToggle.bind(this) }
         ];
         this.data = {};
-        this.getHoroscope().then(this.getTranslate.bind(this));
-    }
-    handleToggle() {
-        this.setState({progresIsStarting: true});
-    }
-    setCompleteProgress() {
-        this.setState({isLoaded: true});
-        this.setState({horoscopeIsActive: true});
-    }
-    getHoroscope() {
-        const signs = [
+        this.signs = [
             'aries',
             'taurus',
             'gemini',
@@ -46,11 +36,20 @@ class App extends Component {
             'aquarius',
             'pisces'
         ];
-
+        this.getHoroscope().then(this.getTranslate.bind(this));
+    }
+    handleToggle() {
+        this.setState({progresIsStarting: true});
+    }
+    setCompleteProgress() {
+        this.setState({isLoaded: true});
+        this.setState({horoscopeIsActive: true});
+    }
+    getHoroscope() {
         let dataPromises = [];
 
-        for (let i = 0; i < signs.length; i++) {
-            dataPromises.push(fetcher.getData(`http://sandipbgt.com/theastrologer/api/horoscope/${signs[i]}/today/`));
+        for (let i = 0; i < this.signs.length; i++) {
+            dataPromises.push(fetcher.getData(`http://sandipbgt.com/theastrologer/api/horoscope/${this.signs[i]}/today/`));
         }
 
         return Promise.all(dataPromises);
@@ -64,14 +63,15 @@ class App extends Component {
                     .then((data) => {
                         this.data[sign] = {
                             text: data.translationText,
-                            ruName: this.getRuSignName(sign)
+                            ruName: this.getRuSignName(sign),
+                            enName: sign.toLowerCase()
                         };
                     });
             }.bind(this))(data[i].sunsign, i);
         }
 
         Promise.all(promises).then(() => {
-            this.setState({data: this.data});
+            this.setState({data: this.orderedSigns(this.data)});
             this.setState({dataFetched: true});
         });
     }
@@ -86,7 +86,7 @@ class App extends Component {
                 return 'Телец';
                 break;
             case 'gemini':
-                return 'Блицнецы';
+                return 'Близнецы';
                 break;
             case 'cancer':
                 return 'Рак';
@@ -97,7 +97,7 @@ class App extends Component {
             case 'virgo':
                 return 'Дева';
                 break;
-            case 'libro':
+            case 'libra':
                 return 'Весы';
                 break;
             case 'scorpio':
@@ -106,7 +106,7 @@ class App extends Component {
             case 'sagittarius':
                 return 'Стрелец';
                 break;
-            case 'capicorn':
+            case 'capricorn':
                 return 'Козерог';
                 break;
             case 'aquarius':
@@ -119,6 +119,19 @@ class App extends Component {
                 return 'Неизвестный';
                 break;
         }
+    }
+    orderedSigns(data){
+        let orderedSigns = [];
+
+        Object.keys(data).map((key, index) => {
+            for(let i = 0; i < this.signs.length; i++) {
+                if (data[key].enName === this.signs[i]) {
+                    orderedSigns[i] = data[key];
+                }
+            }
+        });
+
+        return orderedSigns;
     }
     render() {
         return (
