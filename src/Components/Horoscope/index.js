@@ -18,7 +18,6 @@ class Horoscope extends Component {
                 label: getRuSignName(props.signsNames[i])
             };
         }
-        console.log(this.selectValues);
     }
 
     slide(slideNumber) {
