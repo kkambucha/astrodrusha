@@ -17,8 +17,10 @@ class Horoscope extends Component {
             <div className="b-horoscope">
                 <Slider {...settings}>
                     {
-                        this.props.data.map(item => {
-                            return <div key={item.toString()}><HoroscopeItem item={item}></HoroscopeItem></div>
+                        Object.keys(this.props.data).map((key, index) => {
+                            console.log(key);
+                            console.log(this.props.data[key]);
+                            return <div key={index.toString()}><HoroscopeItem item={key}></HoroscopeItem></div>
                         })
                     }
                 </Slider>
