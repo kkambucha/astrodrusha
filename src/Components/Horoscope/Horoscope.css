@@ -2,12 +2,13 @@
 	max-width: 600px;
 	margin: 10px auto;
 }
-.b-horoscope__item img {
-	width: 100%;
-	height: auto;
-}
 .b-horoscope__select {
 	padding: 0 10px;
 	max-width: 350px;
 	margin: 0 auto 10px auto;
+}
+.b-horoscope__image {
+	display: block;
+	margin: 0 auto;
+	width: 200px !important;
 }
