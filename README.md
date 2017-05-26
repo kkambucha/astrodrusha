@@ -7,3 +7,6 @@ You can find the most recent version of this guide [here](https://github.com/fac
 Перевод - http://www.transltr.org/api/translate?text=cat&to=ru&from=bs
 
 Астрологические прогнозы от Андрюши.
+Использован react на сей раз без redux, сервис прогнозов и сервис переводов.
+
+Работающее можно посмотреть здесь - http://bozekakoikotik.ru/astrodrusha
