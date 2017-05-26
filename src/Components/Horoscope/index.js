@@ -18,6 +18,7 @@ class Horoscope extends Component {
                 label: getRuSignName(props.signsNames[i])
             };
         }
+        this.slide = this.slide.bind(this);
     }
 
     slide(slideNumber) {
@@ -40,7 +41,7 @@ class Horoscope extends Component {
                 <div className="b-horoscope__select">
                     <Dropdown
                         source={this.selectValues}
-                        onChange={this.slide.bind(this)}
+                        onChange={this.slide}
                         value={this.state.slideSelected}
                     />
                 </div>

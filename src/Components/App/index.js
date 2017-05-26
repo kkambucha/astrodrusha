@@ -1,10 +1,9 @@
 import React, { Component } from 'react';
 import AppBar from 'react-toolbox/lib/app_bar/AppBar';
 import Dialog from 'react-toolbox/lib/dialog/Dialog';
-import TopMenu from '../TopMenu';
 import Horoscope from '../Horoscope';
 import Progress from '../Progress';
-import fetcher from '../../fetcher';
+import fetcher from '../../libs/fetcher';
 import '../../assets/react-toolbox/theme.css';
 import './App.css';
 import getRuSignName from '../../libs/translateSigns';
@@ -20,7 +19,7 @@ class App extends Component {
             data: {}
         };
         this.actions = [
-            { label: "Готов", onClick: this.handleToggle.bind(this) }
+            { label: "Готов", onClick: this.acceptToggle.bind(this) }
         ];
         this.data = {};
         this.signs = [
@@ -37,9 +36,10 @@ class App extends Component {
             'aquarius',
             'pisces'
         ];
-        this.getHoroscope().then(this.getTranslate.bind(this));
+        this.acceptToggle = this.acceptToggle.bind(this);
+        this.setCompleteProgress = this.setCompleteProgress.bind(this);
     }
-    handleToggle() {
+    acceptToggle() {
         this.setState({progresIsStarting: true});
     }
     setCompleteProgress() {
@@ -79,7 +79,7 @@ class App extends Component {
     orderedSigns(data){
         let orderedSigns = [];
 
-        Object.keys(data).map((key, index) => {
+        Object.keys(data).map((key) => {
             for(let i = 0; i < this.signs.length; i++) {
                 if (data[key].enName === this.signs[i]) {
                     orderedSigns[i] = data[key];
@@ -89,17 +89,20 @@ class App extends Component {
 
         return orderedSigns;
     }
+    componentWillMount() {
+        this.getHoroscope().then(this.getTranslate.bind(this));
+    }
     render() {
         return (
             <div className="b-app">
                 <AppBar title='АстроДрюша'/>
                 {this.state.dataFetched && this.state.horoscopeIsActive ? <Horoscope data={this.state.data} signsNames={this.signs}/> : null}
-                {this.state.progresIsStarting && !this.state.isLoaded ? <Progress setCompleteProgress={this.setCompleteProgress.bind(this)}/> : null}
+                {this.state.progresIsStarting && !this.state.isLoaded ? <Progress setCompleteProgress={this.setCompleteProgress}/> : null}
                 <Dialog
                     actions={this.actions}
                     active={!this.state.progresIsStarting}
-                    onEscKeyDown={this.handleToggle.bind(this)}
-                    onOverlayClick={this.handleToggle.bind(this)}
+                    onEscKeyDown={this.acceptToggle}
+                    onOverlayClick={this.acceptToggle}
                     title='Подумайте, надо ли...'
                 >
                     <p>Вы точно готовы узнать, что вас ждет сегодня?</p>

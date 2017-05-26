@@ -28,7 +28,7 @@ class Progress extends Component {
                 clearTimeout(this.progressTimer);
                 this.props.setCompleteProgress();
             }
-        }, (Math.random() * 1 + 1) * 800); // было 1300 норм
+        }, (Math.random() * 1 + 1) * 800);
     }
 
     increaseProgress () {
